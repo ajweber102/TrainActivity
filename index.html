@@ -11,6 +11,7 @@
   <!-- Added Moment JS -->
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
     <section class="container">
         <label><h5>Current Train Schedule</h5></label>
         <div class="card">
-            <table class="table">
+            <table class="table" id="trainTable">
                 <thead>
                     <tr>
                     <th scope="col">Train Name</th>
@@ -45,29 +46,28 @@
                 </tbody>
             </table>
         </div>
-        <hr>
         <div class="container">
             <!-- Section 1 - Add Employee -->
             <div class="row">
                 <form class="col-md-12" id="form">
                     <label><h5>Add Train</h5></label>
                     <div class="form-group">
-                        <label for="name-input">Train Name:</label>
-                        <input type="text" class="form-control" id="name-input" placeholder="Oregon Trail">
+                        <label for="train-input">Train Name:</label>
+                        <input type="text" class="form-control" id="train-input" placeholder="Oregon Trail">
                     </div>
                     <div class="form-group">
-                        <label for="role-input">Destination:</label>
-                        <input type="text" class="form-control" id="role-input" placeholder="Philadelphia">
+                        <label for="destination-input">Destination:</label>
+                        <input type="text" class="form-control" id="destination-input" placeholder="Philadelphia">
                     </div>
                     <div class="form-group">
-                        <label for="start-input">First Train Time (HH:mm - military time)</label>
-                        <input type="text" class="form-control" id="start-input" placeholder="14:30">
+                        <label for="time-input">First Train Time (HH:mm - military time)</label>
+                        <input type="text" class="form-control" id="time-input" placeholder="14:30">
                     </div>
                     <div class="form-group">
-                        <label for="rate-input">Frequency (min):</label>
-                        <input type="text" class="form-control" id="rate-input" placeholder="4">
+                        <label for="frequency-input">Frequency (min):</label>
+                        <input type="text" class="form-control" id="frequency-input" placeholder="4">
                     </div>
-                    <button class="btn btn-primary" id='submit-employee'>Submit</button>
+                    <div class="btn btn-primary" id='submit'>Submit</div>
                 </form>
             </div>
         </div>
@@ -107,43 +107,58 @@
     // 7 - 2 = 5 minutes away
     // 5 + 3:16 = 3:21
 
-    // Assumptions
-    var tFrequency = 3;
+
+    $("#submit").click(function() {
+        var tFrequency = 3;
 
     // Time is 3:30 AM
-    var firstTime = "01:30";
+        var firstTime = "01:30";
 
-    // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-    console.log(firstTimeConverted);
+        // First Time (pushed back 1 year to make sure it comes before current time)
+        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
 
-    // Current Time
-    var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        // Current Time
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-    // Difference between the times
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
+        // Difference between the times
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
 
-    // Time apart (remainder)
-    var tRemainder = diffTime % tFrequency;
-    console.log(tRemainder);
+        // Time apart (remainder)
+        var tRemainder = diffTime % tFrequency;
+        console.log(tRemainder);
 
-    // Minute Until Train
-    var tMinutesTillTrain = tFrequency - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+        // Minute Until Train
+        var tMinutesTillTrain = tFrequency - tRemainder;
+        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-    // Next Train
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+        // Next Train
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-    $("#frequency").text(snapshot.val().tRemainder);
-    $("#nextArrival").text(snapshot.val().tMinutesTillTrain);
-    $("#minutesAway").text(snapshot.val().nextTrain);
+        $("#trainTable").append(
+            "<tr>" +
+            "<td>" + $("#train-input").val() + "</td>" +
+            "<td>" + $("#destination-input").val() + "</td>" +
+            "<td>" + $("#time-input").val() + "</td>" +
+            "<td>" + $("#frequency-input").val() + "</td>" +
+            "<td>" + nextTrain + "</td>" +
+            "</tr>"
+        );
 
+    });
+    // Assumptions
+
+
+    
+//    $("#submit").click(function() {
+//
+ //       $("#total").text(counter += crystals[3]);
+ //       
+//    });
   </script>
-
-</body>
 
 </html>
 
