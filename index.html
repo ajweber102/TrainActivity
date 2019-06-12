@@ -46,6 +46,7 @@
                 </tbody>
             </table>
         </div>
+        <hr>
         <div class="container">
             <!-- Section 1 - Add Employee -->
             <div class="row">
@@ -74,45 +75,13 @@
     </section>
 
   <script>
-    // Assume the following situations.
-
-    // (TEST 1)
-    // First Train of the Day is 3:00 AM
-    // Assume Train comes every 3 minutes.
-    // Assume the current time is 3:16 AM....
-    // What time would the next train be...? (Use your brain first)
-    // It would be 3:18 -- 2 minutes away
-
-    // (TEST 2)
-    // First Train of the Day is 3:00 AM
-    // Assume Train comes every 7 minutes.
-    // Assume the current time is 3:16 AM....
-    // What time would the next train be...? (Use your brain first)
-    // It would be 3:21 -- 5 minutes away
-
-
-    // ==========================================================
-
-    // Solved Mathematically
-    // Test case 1:
-    // 16 - 00 = 16
-    // 16 % 3 = 1 (Modulus is the remainder)
-    // 3 - 1 = 2 minutes away
-    // 2 + 3:16 = 3:18
-
-    // Solved Mathematically
-    // Test case 2:
-    // 16 - 00 = 16
-    // 16 % 7 = 2 (Modulus is the remainder)
-    // 7 - 2 = 5 minutes away
-    // 5 + 3:16 = 3:21
-
 
     $("#submit").click(function() {
-        var tFrequency = 3;
+        
+        var tFrequency = $("#frequency-input").val();
 
     // Time is 3:30 AM
-        var firstTime = "01:30";
+        var firstTime = $("#time-input").val();
 
         // First Time (pushed back 1 year to make sure it comes before current time)
         var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
@@ -142,9 +111,9 @@
             "<tr>" +
             "<td>" + $("#train-input").val() + "</td>" +
             "<td>" + $("#destination-input").val() + "</td>" +
-            "<td>" + $("#time-input").val() + "</td>" +
-            "<td>" + $("#frequency-input").val() + "</td>" +
-            "<td>" + nextTrain + "</td>" +
+            "<td>" + tFrequency + "</td>" +
+            "<td>" + moment(nextTrain).format("hh:mm") + "</td>" +
+            "<td>" + tMinutesTillTrain + "</td>" +
             "</tr>"
         );
 
