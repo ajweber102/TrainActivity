@@ -17,60 +17,48 @@
 <body>
     <section>
         <div class="jumbotron">
-            <h1>
+            <h1 class="display-4 text-muted text-center">
                 Anytime is Train Time
             </h1>
         </div>
     </section>
     <section class="container">
         <label><h5>Current Train Schedule</h5></label>
-        <div class="card">
-            <table class="table" id="trainTable">
-                <thead>
-                    <tr>
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (min)</th>
-                    <th scope="col">Next Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td id="trainName"></td>
-                    <td id="destination"></td>
-                    <td id="frequency"></td>
-                    <td id="nextArrival"></td>
-                    <td id="minutesAway"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table" id="trainTable">
+            <thead>
+                <tr>
+                <th scope="col">Train Name</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Frequency (min)</th>
+                <th scope="col">Next Arrival</th>
+                <th scope="col">Minutes Away</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+    <section class="container">
         <hr>
-        <div class="container">
-            <!-- Section 1 - Add Employee -->
-            <div class="row">
-                <form class="col-md-12" id="form">
-                    <label><h5>Add Train</h5></label>
-                    <div class="form-group">
-                        <label for="train-input">Train Name:</label>
-                        <input type="text" class="form-control" id="train-input" placeholder="Oregon Trail">
-                    </div>
-                    <div class="form-group">
-                        <label for="destination-input">Destination:</label>
-                        <input type="text" class="form-control" id="destination-input" placeholder="Philadelphia">
-                    </div>
-                    <div class="form-group">
-                        <label for="time-input">First Train Time (HH:mm - military time)</label>
-                        <input type="text" class="form-control" id="time-input" placeholder="14:30">
-                    </div>
-                    <div class="form-group">
-                        <label for="frequency-input">Frequency (min):</label>
-                        <input type="text" class="form-control" id="frequency-input" placeholder="4">
-                    </div>
-                    <div class="btn btn-primary" id='submit'>Submit</div>
-                </form>
-            </div>
+        <div class="row">
+            <form class="col-md-12" id="form">
+                <label><h5>Add Train</h5></label>
+                <div class="form-group">
+                    <label for="train-input">Train Name:</label>
+                    <input type="text" class="form-control" id="train-input" placeholder="Oregon Trail">
+                </div>
+                <div class="form-group">
+                    <label for="destination-input">Destination:</label>
+                    <input type="text" class="form-control" id="destination-input" placeholder="Philadelphia">
+                </div>
+                <div class="form-group">
+                    <label for="time-input">First Train Time (HH:mm - military time)</label>
+                    <input type="text" class="form-control" id="time-input" placeholder="14:30">
+                </div>
+                <div class="form-group">
+                    <label for="frequency-input">Frequency (min):</label>
+                    <input type="text" class="form-control" id="frequency-input" placeholder="4">
+                </div>
+                <div class="btn btn-primary" id='submit'>Submit</div>
+            </form>
         </div>
     </section>
 
